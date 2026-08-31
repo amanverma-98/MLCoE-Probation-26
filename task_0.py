@@ -27,7 +27,7 @@ class bowler(Player):
         return points
 
 class allrounder(Player):
-    def Perform(self):
+    def perform(self):
         run_points=random.randint(0,20)
         wicket_points=random.randint(0,3)*20
         points=run_points+wicket_points
@@ -46,6 +46,32 @@ class teams:
             self.__budget-=price
             Player.sold_price=price
             self.__squad.append(player_name)
+            return True
+    def show_squad(self):
+        print(f"\n {self.team_name}\nRemaining budget : {self.__budget}")
+        for i in self.__squad:
+            print(f"\n->{i}")
+
+class auction:
+    def __init__(self,player_name,teams):
+        self.player_name=player_name
+        self.teams=teams
+    def bidding(self):
+        for player in self.player_name:
+            random.shuffle(self.teams)
+            sold=False
+            for team in self.teams:
+                price=random.randint(player.base_price,player.base_price +20)
+                if teams.buy_player(player,price):
+                    print(f"{player.name} sold to {team} in {price} cr")
+                    sold=True
+                    break
+            if not sold:
+                print(f"{Player.name} -> unsold")
+
+
+
+
 
 
 
