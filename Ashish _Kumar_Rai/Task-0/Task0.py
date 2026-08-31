@@ -83,7 +83,7 @@ class Auction():
                 buyer = random.choice(eligible_teams)
                 buyer.buy_player(player)
             else:
-                print(f"Unsold: No eligible team available for {player.name}.")
+                print(f"Unsold:{player.name}.")
 
 class Match():
     """Simulates a match between two teams."""
@@ -167,22 +167,22 @@ Punjab_Kings = Team("Punjab Kings", 100)
 auction = Auction(random.sample(player_pool, k=35), [Gujarat_Titans, Lucknow_Super_Giants, Punjab_Kings])
 auction.start_auction()
 
-print("\n======================= SQUADS ===================")
+print("\n SQUADS ")
 Gujarat_Titans.show_squad()
 Lucknow_Super_Giants.show_squad()
 Punjab_Kings.show_squad()
 
-print("\n=================== MATCH1 SIMULATION ===================")
+print("\nMATCH1 SIMULATION")
 
 Match1 = Match(Gujarat_Titans, Lucknow_Super_Giants)
 Match1.play_match()
 
-print("\n=================== MATCH2 SIMULATION ===================")
+print("\nMATCH2 SIMULATION")
 
 match2 = Match(Lucknow_Super_Giants, Punjab_Kings)
 match2.play_match()
 
-print("\n=================== MATCH3 SIMULATION ===================")
+print("\nMATCH3 SIMULATION")
 
 match3 = Match(Punjab_Kings, Gujarat_Titans)
 match3.play_match()
