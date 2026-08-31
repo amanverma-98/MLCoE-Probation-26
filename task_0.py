@@ -22,8 +22,9 @@ class batsman(Player):
 
 class bowler(Player):
     def perform(self):
-        points=random.randint(0,5)*20
-        print(f"{self.name} took {points} wickets ,contributing {points} points")
+        wickets=random.randint(0,5)
+        points=wickets*20
+        print(f"{self.name} took {wickets} wickets ,contributing {points} points")
         return points
 
 class allrounder(Player):
@@ -31,7 +32,8 @@ class allrounder(Player):
         run_points=random.randint(0,20)
         wicket_points=random.randint(0,3)*20
         points=run_points+wicket_points
-        print(f"{self.player} make {run_points} runs and took {wicket_points} wickets ,contributing {points} points")
+        wickets=wicket_points//20
+        print(f"{self.name} made {run_points} runs and took {wickets} wickets ,contributing {points} points")
         return points
 
 class Teams:
@@ -44,7 +46,7 @@ class Teams:
             return False
         else:
             self.__budget-=price
-            Player.sold_price=price
+            player_name.sold_price=price
             self.__squad.append(player_name)
             return True
     def show_squad(self):
@@ -52,7 +54,7 @@ class Teams:
         for i in self.__squad:
             print(f"\n->{i}")
     def get_squad(self):
-        return self.__squad
+        return list(self.__squad)
 
 class auction:
     def __init__(self,player_name,teams):
@@ -64,12 +66,12 @@ class auction:
             sold=False
             for team in self.teams:
                 price=random.randint(player.base_price,player.base_price +20)
-                if teams.buy_player(player,price):
-                    print(f"{player.name} sold to {team} in {price} cr")
+                if team.buy_player(player,price):
+                    print(f"{player.name} sold to {team.team_name} in {price} cr")
                     sold=True
                     break
             if not sold:
-                print(f"{Player.name} -> unsold")
+                print(f"{player.name} -> unsold")
 
 class match:
     def __init__(self,team1,team2):
@@ -82,33 +84,30 @@ class match:
         return score
     def play(self):
         print("--match start--")
-        print(f"{self.team1.name} performance")
+        print(f"{self.team1.team_name} performance")
         score1=self.scores(self.team1)
+        print(f"\n{self.team2.team_name} performance")
         score2=self.scores(self.team2)
-        print(f"\n{self.team1.name} total : {score1}")
-        print(f"\n{self.team2.name} total : {score2}")
+        print(f"\n{self.team1.team_name} total : {score1}")
+        print(f"\n{self.team2.team_name} total : {score2}")
         if score1>score2:
-            print(f"{self.team1.name} won the match!")
+            print(f"{self.team1.team_name} won the match!")
         elif score1<score2:
-            print(f"{self.team2.name} won the match!")
+            print(f"{self.team2.team_name} won the match!")
         else:
             print("match is draw!!")
 
 players = [
-
     batsman("Rohit Sharma", 2),
     batsman("Virat Kohli", 2),
     batsman("Shubman Gill", 2),
     batsman("Rishabh Pant", 2),
-
     bowler("Jasprit Bumrah", 2),
     bowler("Mohammed Shami", 2),
     bowler("Kuldeep Yadav", 2),
-
     allrounder("Hardik Pandya", 2),
     allrounder("Ravindra Jadeja", 2),
     allrounder("Axar Patel", 2),
-
 ]
 
 team1 = Teams("Team Titans", 100)
@@ -123,10 +122,5 @@ act.bidding()
 for i in teams:
     i.show_squad()
 
-
 mat=match(team1,team2)
 mat.play()
-
-
-
-
