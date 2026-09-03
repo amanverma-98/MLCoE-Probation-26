@@ -40,9 +40,6 @@ class AllRounder(Player):
 
         return batting + bowling
 
-
-
-
 class Team:
 
     def __init__(self, name, budget=100):
@@ -119,7 +116,7 @@ class Auction:
 
                 print(
                     f"{player.name} ({player.__class__.__name__}) "
-                    f"– UNSOLD"
+                    f"- UNSOLD"
                 )
 
         print()
